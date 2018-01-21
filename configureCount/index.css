@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%; 
+  width: calc(100% - 10px);
+  padding: 0 5px;  
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+.title {
+  padding: 10px 0; 
+}
+
+.parts,
+.order {
+  padding: 10px 0 0; 
+}
+
+.order {
+  max-width: 60%; 
+}
+
+.field {
+  min-width: 250px;
+  max-width: 300px;  
+  width: 100%; 
+  display: block; 
+  padding: 5px 0;   
+  display: flex; 
+  align-items: center; 
+}
+
+.field label {
+  margin-right: 5px; 
+  user-select: none; 
+}
+
+.field input {
+  padding: 2px; 
+  font-size: 14px; 
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid #C0C0C0; 
+  border-radius: 3px; 
+}
+
+.field.text input {
+  padding: 4px; 
+  flex-grow: 1;
+}
+
+.field.full-label {
+  display: block; 
+}
+
+.field.full-label label {
+  width: 100%; 
+  display: block; 
+}
+.field.full-label input {
+  margin-top: 2px; 
+  width: 100%; 
+}
+
+#dropRects,
+#dragRects {
+  padding: 5px 0 10px; 
+}
+
+#dropRects div,
+#dragRects div {
+  width: 70px;
+  height: 70px; 
+  border: 1px solid #c0c0c0;
+  text-align: center; 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-right: 2px; 
+  vertical-align: middle; 
+}
+
+#dropRects div div {
+  border: none; 
+}
+
+#titleFontSize,
+#countdownSize,
+#borderWidth,
+#borderRadius {
+  width: 100px; 
+}
+
+#create {
+  padding: 8px 16px; 
+  background: #4d9de0; 
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  border: none; 
+  border-radius: 5px;  
+  color: #ffffff; 
+  font-weight: bold; 
+  font-size: 16px; 
+  margin: 10px 0 20px; 
+  outline: 0; 
+  cursor: pointer; 
+}
+#create:active {
+  box-shadow: inset 0 3px 8px #2177bf;  
+}

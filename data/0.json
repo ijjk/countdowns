@@ -1,0 +1,22 @@
+{
+  "title": "Countdown to Jan, 25th",
+  "titleStyle": {
+    "color": "cyan"
+  },
+  "windowStyle": {
+    "background": "rgba(0, 0, 0, 0.1)"
+  },
+  "width": 392,
+  "height": 84,
+  "posX": 1039,
+  "posY": 7,
+  "destDate": "2018-01-26T02:18:27.283Z",
+  "months": false,
+  "days": true,
+  "hours": true,
+  "minutes": true,
+  "seconds": true,
+  "countStyle": {
+    "color": "white"
+  }
+}
