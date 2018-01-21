@@ -1,0 +1,16 @@
+{
+  "name": "countdown",
+  "version": "0.1.0",
+  "description": "a desktop countdown built with electron",
+  "main": "index.js",
+  "author": "JJ Kasper",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "electron --enable-transparent-visuals --disable-gpu ."
+  },
+  "dependencies": {
+    "electron": "^1.7.10",
+    "nodemon": "^1.14.11"
+  }
+}
