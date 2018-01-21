@@ -5,7 +5,7 @@ const countTitle = document.querySelector('#countTitle');
 const countEl = document.querySelector('#count'); 
 const conf = win.countConf; 
 
-// win.webContents.openDevTools(); 
+win.webContents.openDevTools(); 
 
 let winCssWidth = 10; 
 let winCssHeight = 10; 
@@ -29,34 +29,44 @@ window.addEventListener('resize', () => {
     win.resized(window.innerWidth, window.innerHeight); 
 });
 
-const destDate = new Date(conf.destDate); 
+const parts = [
+  'years',
+  'months',
+  'weeks',
+  'days',
+  'hours',
+  'minutes',
+  'seconds'
+];
 
-const updateClock = () => {
-  const curDate = new Date(); 
-  const diffSecs = Math.round((destDate - curDate) / 1000); 
-  const getDays = diffSecs / (60 * 60 * 24); 
-  let numDays = Math.floor(getDays) ; 
-      numDays = numDays < 0 ? 0 : numDays; 
+const updateClock = (ts) => {
+  let countStr = ''; 
+  let numAdded = 0; 
 
-  const percOfDay = getDays - Math.floor(getDays); 
-  const secsInDay = 86400; 
-  const totSecs = secsInDay * percOfDay;
-  const getHours = totSecs / 3600; 
-  const percOfHour = getHours - Math.floor(getHours); 
-  const getMins = 60 * percOfHour; 
-  const percOfMin = getMins - Math.floor(getMins); 
-  const getSecs = 60 * percOfMin; 
+  parts.forEach((p) => {
+    if(conf[p]) {
 
-  const [days, hours, mins, secs] = [
-    getDays, 
-    getHours, 
-    getMins, 
-    getSecs
-  ].map((val) => Math.floor(val)); 
+      if(numAdded > 0) {
+        countStr += ', '; 
+      }
+      
+      countStr += ts[p] + ' ' + p; 
+      numAdded += 1; 
+    }
+  });
 
-  countEl.innerHTML = days + ' days, ' + hours + ' hours, ' + mins + ' minutes, and ' + secs + ' seconds'; 
-
-  setTimeout(updateClock, 1000); 
+  countEl.innerHTML = countStr; 
 };
 
-updateClock(); 
+let units = 0; 
+
+parts.forEach((p) => {
+  if(conf[p]) {
+    units = units | countdown[p.toUpperCase()]
+  }
+});
+
+const timer = countdown(
+  updateClock,
+  new Date(conf.destDate),
+  units); 
