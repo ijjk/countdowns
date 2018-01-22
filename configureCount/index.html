@@ -4,7 +4,7 @@
   <link rel='stylesheet' type='text/css' href='index.css' />
 </head>
 <body>
-  <h4 class='title'>Countdown to</h4>
+  <h4 class='p10'>Countdown to (live preview on bottom)</h4>
 
   <div class='field'>
     <label for='destDate'>Date: </label>
@@ -26,7 +26,7 @@
     <input type='text' id='titleFontFamily' placeholder='Font name e.g. Arial, Helvetica, sans-serif'/>
   </div>
 
-  <div class='field'>
+  <div class='field num'>
     <label for='titleFontSize'>Title font-size: </label>
     <input type='number' min='1' id='titleFontSize' value='16' />
   </div>
@@ -36,7 +36,55 @@
     <input type='color' id='titleColor' value='#00ffff' title='Click to pick color' />
   </div>
 
-  <h5 class='parts'>Countdown parts</h5>
+  <div class='field'>
+    <label for='titleAlign'>Title alignment: </label>
+    <select id='titleAlign'>
+      <option>left</option>
+      <option>center</option>
+      <option>right</option>
+    </select>
+  </div>
+
+  <h5 class='p10t'>Countdown parts</h5>
+
+  <div class='field'>
+    <label for='countdownColor'>Countdown color: </label>
+    <input type='color' id='countdownColor' value='#ffffff' />
+  </div>
+
+  <div class='field num'>
+    <label for='countdownSize'>Countdown size: </label>
+    <input type='number' id='countdownSize' value='16' />
+  </div>
+
+  <div class='field text full-label'>
+    <label for='countdownFont'>Countdown font-family: </label>
+    <input type='text' id='countdownFont' placeholder='Font name e.g. Arial, Comic Sans MS, serif' />
+  </div>
+
+  <div class='field'>
+    <label for='countdownPos'>Countdown position: </label>
+    <select id='countdownPos'>
+      <option>left</option>
+      <option>center</option>
+      <option>right</option>
+    </select>
+  </div>
+
+  <div class='field'>
+    <label for='labelPosition'>Label position: </label>
+    <select id='labelPosition'>
+      <option>bottom</option>
+      <option>top</option>
+      <option>left</option>
+      <option>right</option>
+    </select>
+  </div>
+
+  <div class='field'>
+    <label for='yearsEl'>Years: </label>
+    <input type='checkbox' id='yearsEl' title='years' />
+  </div>
 
   <div class='field'>
     <label for='monthsEl'>Months: </label>
@@ -65,39 +113,13 @@
 
   <div class='field'>
     <label for='secondsEl'>Seconds: </label>
-    <input type='checkbox' id='secondsEl' title='seconds' />
+    <input type='checkbox' id='secondsEl' title='seconds' checked='true' />
   </div>
 
-  <div class='field'>
-    <label for='labelPosition'>Label position: </label>
-    <select id='labelPosition'>
-      <option>top</option>
-      <option>left</option>
-      <option>right</option>
-      <option>bottom</option>
-    </select>
-  </div>
-
-  <div class='field'>
-    <label for='countdownColor'>Countdown color: </label>
-    <input type='color' id='countdownColor' value='#ffffff' />
-  </div>
-
-  <div class='field'>
-    <label for='countdownSize'>Countdown size: </label>
-    <input type='number' id='countdownSize' value='14' />
-  </div>
-
-  <div class='field text full-label'>
-    <label for='countdownFont'>Countdown font-family: </label>
-    <input type='text' id='countdownFont' placeholder='Font name e.g. Arial, Comic Sans MS, serif' />
-  </div>
-
-  <h5 class='order'>Countdown order (drag and drop boxes below to order them or click to put in first empty box)</h5>
+  <h5 class='p10t'>Countdown order (drag and drop boxes below to order them)</h5>
 
   <div>
     <div id='dropRects'></div>
-    <div id='dragRects'></div>
   </div>
 
   <div class='field'>
@@ -105,12 +127,12 @@
     <input type='color' id='bgColor' value='#000000' />
   </div>
 
-  <div class='field full-label'>
+  <div class='field full-label num'>
     <label for='bgOpacity'>Background transparency (1 = no transparency): </label>
-    <input type='number' min='0.0' max='1.0' id='bgOpacity' step='0.1' value='0.6' /> 
+    <input type='number' min='0.0' max='1.0' id='bgOpacity' step='0.1' value='0.5' /> 
   </div>
 
-  <div class='field full-label'>
+  <div class='field full-label num'>
     <label for='borderWidth'>Border width (0 for none): </label>
     <input type='number' min='0' id='borderWidth' value='0' />
   </div>
@@ -120,12 +142,31 @@
     <input type='color' id='borderColor' value='#ff8000' />
   </div>
 
-  <div class='field full-label'>
-    <label for='borderRadius'>Border radius (how round the border is): </label>
-    <input type='number' min='0' id='borderRadius' value='0' />
+  <div class='field'>
+    <label for='borderOpacity'>Border opacity: </label>
+    <input type='number' min='0' max='1.0' step='0.1' id='borderOpacity' value='1.0' />
   </div>
 
-  <button id='create'>Create countdown</button>
+  <div class='field num'>
+    <label for='borderRadius'>Border radius (how round): </label>
+    <input type='number' id='borderRadius' value='0' />
+  </div>
+
+  <h5 class='p10'>Note: You can resize the countdown below by dragging the bottom right corner</h5>
+
+  <div class='field num'>
+    <label for='countWidth'>Width: </label>
+    <input type='number' id='countWidth' value='300' />
+  </div>
+
+  <div class='field num'>
+    <label for='countHeight'>Height: </label>
+    <input type='number' id='countHeight' value='75' />
+  </div>
+
+  <webview src='../countdown/index.html' id='webview'></webview>
+
+  <button id='createBtn'>Create countdown</button>
 
   <script type='text/javascript' src='index.js'></script>
 </body>

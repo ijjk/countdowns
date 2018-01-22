@@ -110,7 +110,7 @@ const makeConfigCount = (countId) => {
     icon,
     title: 'Configure countdown',
     height: 600,
-    width: 500,
+    width: 600,
     minWidth: 500,
     autoHideMenuBar: true
   });

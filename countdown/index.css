@@ -11,12 +11,12 @@ html {
 body {
   height: calc(100% - 10px); 
   width: calc(100% - 10px); 
+  background: rgba(0, 0, 0, 0.01); 
   font-family: sans-serif; 
   color: #ffffff;
   user-select: none; 
   -webkit-app-region: no-drag; 
   padding: 5px; 
-  background: rgba(0, 0, 0, 0.6); 
   display: flex; 
   align-items: center; 
   overflow: hidden; 
@@ -26,12 +26,11 @@ body {
   -webkit-app-region: drag;   
   z-index: 0; 
   height: 100%; 
-  width: calc(100% - 20px); 
+  width: calc(100% - 10px); 
   padding: 0 5px; 
   display: flex; 
   flex-wrap: wrap; 
   align-content: center;
-  font-size: 20px; 
   overflow: hidden; 
 }
 
@@ -42,3 +41,33 @@ body {
 #count {
   width: 100%; 
 }
+#count div {
+  display: inline-block;
+}
+
+#count .top,
+#count .bottom {
+  margin-right: 10px; 
+  text-align: center; 
+}
+
+/* #count .top:last-child,
+#count .bottom:last-child {
+  margin-right: 0; 
+} */
+
+#count .top p,
+#count .bottom p {
+  display: block; 
+  clear: both; 
+}
+
+#count .left p,
+#count .right p {
+  margin-right: 5px;
+}
+
+/* #count .left:last-child p,
+#count .right:last-child p {
+  margin-right: 0; 
+} */
