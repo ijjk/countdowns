@@ -7,8 +7,6 @@ try {
   win = remote.getCurrentWindow(); 
   conf = win.countConf; 
 
-  win.webContents.openDevTools(); 
-
   window.addEventListener('resize', () => {
     win.resized(window.innerWidth, window.innerHeight); 
   });
