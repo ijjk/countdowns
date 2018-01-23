@@ -60,7 +60,6 @@ const createCount = (configFile, conf, idx) => {
   wins[idx].on('closed', () => {
     delete wins[idx];
     wins.splice(idx, idx + 1); 
-    console.log('removed count', idx); 
   }); 
 
   wins[idx].resizeTime = null; 
