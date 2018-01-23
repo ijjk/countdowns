@@ -6,7 +6,7 @@ const {
 const path = require('path'); 
 
 app.tray = null; 
-app.wins = []; 
+app.wins = {}; 
 app.paths = {}; 
 app.paths.icon = path.join(__dirname, 'icon.png'); 
 app.paths.dataDir = path.join(__dirname, 'data'); 
@@ -51,6 +51,7 @@ app.on('ready', () => {
   app.tray.setContextMenu(contextMenu); 
 
   app.loadCounts(); 
+  app.createConfigWin(0); 
 });
 // end of app.on('ready')
 
@@ -61,7 +62,7 @@ app.on('window-all-closed', () => {
 }); 
 
 app.on('activate', () => {
-  if(app.wins.length === 0) {
+  if(Object.keys(app.wins) === 0) {
     app.loadCounts(); 
   }
 });

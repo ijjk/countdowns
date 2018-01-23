@@ -9,12 +9,12 @@ module.exports = function() {
       console.error(err); 
     }
 
-    files.forEach((item, idx) => {
+    files.forEach((item) => {
       const curFile = path.join(app.paths.dataDir, item); 
       const getConf = fs.readFileSync(curFile).toString(); 
       const conf = JSON.parse(getConf); 
 
-      app.createCount(curFile, conf, idx); 
+      app.createCount(curFile, conf); 
 
     }); // end of files.forEach
 

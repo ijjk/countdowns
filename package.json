@@ -12,6 +12,7 @@
     "lint": "eslint --config .eslintrc.json ./index.js ./src"
   },
   "dependencies": {
+    "deep-diff": "^0.3.8",
     "electron": "^1.7.10"
   },
   "devDependencies": {

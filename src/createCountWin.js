@@ -1,11 +1,13 @@
 const { BrowserWindow } = require('electron'); 
 const fs = require('fs'); 
+const path = require('path'); 
 const url = require('url'); 
 
-module.exports = function(configFile, conf, idx) {
+module.exports = function(configFile, conf) {
   const app = this; 
   const wins = app.wins;
-  
+  const idx = path.basename(configFile); 
+
   wins[idx] = new BrowserWindow({
     width: conf.width,
     height: conf.height,
@@ -45,7 +47,7 @@ module.exports = function(configFile, conf, idx) {
   })); 
 
   wins[idx].on('closed', () => {
-    wins.splice(idx, idx + 1); 
+    delete wins[idx]; 
   }); 
 
   wins[idx].resizeTime = null; 
