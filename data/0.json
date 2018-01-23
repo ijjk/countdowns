@@ -1,17 +1,18 @@
 {
   "title": "Countdown to Jan, 25th",
   "titleStyle": {
-    "color": "cyan"
+    "color": "#00ffff",
+    "fontSize": "16px"
   },
   "windowStyle": {
     "background": "rgba(0, 0, 0, 0.3)",
-    "border": "1px solid orange",
-    "borderRadius": "5px"
+    "border": "0px solid rgba(255, 0, 0, 1)",
+    "borderRadius": "4px"
   },
   "width": 327,
   "height": 106,
-  "posX": 1113,
-  "posY": 6,
+  "posX": 1109,
+  "posY": 10,
   "destDate": "2018-01-26T02:18:27.283Z",
   "labelPos": "bottom",
   "order": [
@@ -22,6 +23,6 @@
     "seconds"
   ],
   "countStyle": {
-    "color": "white"
+    "color": "#ffffff"
   }
 }

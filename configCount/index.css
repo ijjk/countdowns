@@ -78,6 +78,7 @@ body {
   justify-content: center; 
   margin-right: 2px; 
   vertical-align: middle; 
+  background: #ffffff; 
 }
 
 #dropRects div div {

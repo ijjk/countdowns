@@ -12,89 +12,96 @@ let tray = null;
 let wins = []; 
 
 const icon = path.join(__dirname, 'icon.png'); 
+const dataDir = path.join(__dirname, 'data'); 
+const countdownIndex = path.join(__dirname, 'countdown', 'index.html'); 
+const configCountIndex = path.join(__dirname, 'configCount', 'index.html'); 
+const selCountIndex = path.join(__dirname, 'selCount', 'index.html'); 
+
+const createCount = (configFile, conf, idx) => {
+  
+  wins[idx] = new BrowserWindow({
+    width: conf.width,
+    height: conf.height,
+    x: conf.posX,
+    y: conf.posY,
+    frame: false,
+    movable: true,
+    transparent: true,
+    skipTaskbar: true,
+    focusable: false,
+    minimizable: false,
+    closable: false,
+    maximizable: false
+  }); 
+
+  wins[idx].countConf = conf; 
+  wins[idx].configFile = configFile; 
+  wins[idx].updateConfTime = null;
+
+  const updateConf = () => {
+    clearTimeout(wins[idx].updateConfTime); 
+
+    wins[idx].updateConfTime = setTimeout(() => {
+      try {
+        fs.writeFileSync(configFile, JSON.stringify(conf, null, 2));  
+      }
+      catch(err) {
+        console.error(err); 
+      }
+    }, 1000);
+  };
+
+  wins[idx].loadURL(url.format({
+    pathname: countdownIndex,
+    protocol: 'file:',
+    slashes: true
+  })); 
+
+  wins[idx].on('closed', () => {
+    delete wins[idx];
+    wins.splice(idx, idx + 1); 
+    console.log('removed count', idx); 
+  }); 
+
+  wins[idx].resizeTime = null; 
+  wins[idx].resized = (width, height) => {
+    clearTimeout(wins[idx].resizeTime); 
+
+    wins[idx].resizeTime = setTimeout(() => {
+      conf.width = width; 
+      conf.height = height; 
+      updateConf(); 
+    }, 500);
+  };
+
+  wins[idx].moveTime = null;
+  wins[idx].on('move', () => {
+    clearTimeout(wins[idx].moveTime); 
+
+    wins[idx].moveTime = setTimeout(() => {
+      const newPos = wins[idx].getPosition(); 
+      
+      conf.posX = newPos[0]; 
+      conf.posY = newPos[1]; 
+      updateConf(); 
+    }, 500); 
+
+  }); 
+};
 
 const createWindows = () => {
 
-  fs.readdir('./data', (err, files) => {
+  fs.readdir(path.join(__dirname, 'data'), (err, files) => {
     if(err) {
       console.error(err); 
     }
 
     files.forEach((item, idx) => {
-      const curFile = path.join(__dirname, 'data/', item); 
+      const curFile = path.join(dataDir, item); 
       const getConf = fs.readFileSync(curFile).toString(); 
       const conf = JSON.parse(getConf); 
 
-      wins[idx] = new BrowserWindow({
-        width: conf.width,
-        height: conf.height,
-        x: conf.posX,
-        y: conf.posY,
-        frame: false,
-        movable: true,
-        transparent: true,
-        skipTaskbar: true,
-        focusable: false,
-        minimizable: false,
-        closable: false,
-        maximizable: false
-      }); 
-
-      wins[idx].countConf = conf; 
-      wins[idx].updateConfTime = null;
-
-      const updateConf = () => {
-        clearTimeout(wins[idx].updateConfTime); 
-
-        wins[idx].updateConfTime = setTimeout(() => {
-          try {
-            fs.writeFileSync(curFile, JSON.stringify(conf, null, 2));  
-          }
-          catch(err) {
-            console.error(err); 
-          }
-        }, 1000);
-      };
-
-      wins[idx].loadURL(url.format({
-        pathname: path.join(__dirname, 'countdown', 'index.html'),
-        protocol: 'file:',
-        slashes: true
-      })); 
-
-      wins[idx].on('closed', () => {
-        delete wins[idx]; 
-      }); 
-
-      wins[idx].resizeTime = null; 
-      wins[idx].resized = (width, height) => {
-        clearTimeout(wins[idx].resizeTime); 
-
-        wins[idx].resizeTime = setTimeout(() => {
-          conf.width = width; 
-          conf.height = height; 
-          updateConf(); 
-
-          console.log('resized window', idx, '!!', width, height); 
-        }, 500);
-      };
-
-      wins[idx].moveTime = null;
-      wins[idx].on('move', () => {
-        clearTimeout(wins[idx].moveTime); 
-
-        wins[idx].moveTime = setTimeout(() => {
-          const newPos = wins[idx].getPosition(); 
-          
-          conf.posX = newPos[0]; 
-          conf.posY = newPos[1]; 
-          updateConf(); 
-
-          console.log('moved window', idx, '!!!', newPos); 
-        }, 500); 
-
-      }); 
-
+      createCount(curFile, conf, idx); 
 
     }); // end of files.forEach
 
@@ -102,6 +109,21 @@ const createWindows = () => {
   
 };
 // end of createWindows()
+
+let watchTime = null; 
+// watch data dir for changes and update countdowns that changed
+fs.watch(
+  dataDir,
+
+  (data) => {
+    clearTimeout(watchTime); 
+
+    watchTime = setTimeout(() => {
+      
+    }, 1000); 
+
+  }); 
+
 
 let configCountWin = null; 
 
@@ -116,15 +138,22 @@ const makeConfigCount = (countId) => {
   });
 
   configCountWin.loadURL(url.format({
-    pathname: path.join(__dirname, 'configureCount', 'index.html'),
+    pathname: configCountIndex,
     protocol: 'file:',
     slashes: true
   })); 
 
+  if(countId) {
+    const configFile = path.join(dataDir, countId + '.json'); 
+  
+    configCountWin.configFile = configFile; 
+    configCountWin.countConf = JSON.parse(
+      fs.readFileSync(configFile).toString());
+  }
+
   configCountWin.on('close', () => {
     configCountWin = null; 
-    console.log('closed configure count window'); 
-  }); 
+  });   
 }; 
 // end of makeNewCountWindow
 
@@ -145,6 +174,13 @@ app.on('ready', () => {
       type: 'normal',
       click: () => {
         console.log('edit clicked');  
+      }
+    },
+    {
+      label: 'Exit completely',
+      type: 'normal',
+      click: () => {
+        app.exit(); 
       }
     }
   ]); 

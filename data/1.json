@@ -1,0 +1,30 @@
+{
+  "title": "Countdown to 5 days away",
+  "titleStyle": {
+    "color": "#00ffff",
+    "fontSize": "16px",
+    "fontFamily": "sans-serif"
+  },
+  "windowStyle": {
+    "background": "rgba(0, 0, 0, 0.5)",
+    "border": "",
+    "borderRadius": ""
+  },
+  "width": 327,
+  "height": 104,
+  "posY": 112,
+  "posX": 1109,
+  "destDate": "2018-01-28T06:27:38.174Z",
+  "labelPos": "bottom",
+  "order": [
+    "days",
+    "hours",
+    "minutes",
+    "seconds"
+  ],
+  "countStyle": {
+    "color": "#ffffff",
+    "fontSize": "16px",
+    "fontFamily": "sans-serif"
+  }
+}
