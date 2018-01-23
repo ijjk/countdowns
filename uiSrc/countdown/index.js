@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 let remote, win, conf; 
 
 try {
@@ -5,7 +7,7 @@ try {
   win = remote.getCurrentWindow(); 
   conf = win.countConf; 
 
-  // win.webContents.openDevTools(); 
+  win.webContents.openDevTools(); 
 
   window.addEventListener('resize', () => {
     win.resized(window.innerWidth, window.innerHeight); 

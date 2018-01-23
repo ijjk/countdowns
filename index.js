@@ -18,6 +18,8 @@ app.paths.selCount = path.join(app.paths.uiSrc, 'selCount', 'index.html');
 app.createCount = require('./src/createCountWin').bind(app); 
 app.loadCounts = require('./src/loadCounts').bind(app); 
 app.createConfigWin = require('./src/createConfigWin').bind(app); 
+app.selCountWin = null; 
+app.createSelectWin = require('./src/createSelectWin').bind(app); 
 app.watchCounts = require('./src/watchCounts').bind(app)(); 
 
 app.on('ready', () => {
@@ -35,7 +37,11 @@ app.on('ready', () => {
       label: 'Edit countdowns',
       type: 'normal',
       click: () => {
-        console.log('edit clicked');  
+        if(app.selCountWin) {
+          console.log('edit countdowns window is already open'); 
+          return; 
+        }
+        app.createSelectWin();
       }
     },
     {
@@ -51,7 +57,11 @@ app.on('ready', () => {
   app.tray.setContextMenu(contextMenu); 
 
   app.loadCounts(); 
-  app.createConfigWin(0); 
+
+  // give time for countdowns to load
+  setTimeout(() => {
+    app.createSelectWin(); 
+  }, 1000); 
 });
 // end of app.on('ready')
 

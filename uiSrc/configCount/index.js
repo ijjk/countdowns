@@ -162,8 +162,23 @@ const updatePrev = () => {
   clearTimeout(updateTime); 
 
   updateTime = setTimeout(() => {
-    webview.style.width = countConf.width + 'px'; 
-    webview.style.height = countConf.height + 'px'; 
+    const width = countConf.width + 'px'; 
+    const height = countConf.height + 'px'; 
+
+    webview.style.width = width; 
+    webview.style.height = height;  
+    
+    /*
+      object inside of webview element isn't resizing
+      for some reason so do it "manually"; 
+    */
+    let shadowObj = webview.shadowRoot.children; 
+
+    if(shadowObj.length > 0){
+      shadowObj = shadowObj[shadowObj.length - 1]; 
+      shadowObj.style.width = width; 
+      shadowObj.style.height = height;  
+    }
 
     webview.executeJavaScript('window.loadConf(' + JSON.stringify(countConf) + ');'); 
   }, 100); 
@@ -172,8 +187,12 @@ const updatePrev = () => {
 require('./handleChange'); 
 require('./handlePartsOrd');  
 
+let didLoad = false; 
 webview.addEventListener('dom-ready', () => {
+  if(didLoad) return; 
+
   updatePrev(); 
+  didLoad = true; 
 });
 
 createBtn.addEventListener('click', () => {
