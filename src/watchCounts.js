@@ -30,7 +30,6 @@ module.exports = function() {
 
             if(files.indexOf(toCheck) < 0) {
               win.destroy(); 
-              console.log(toCheck, 'was deleted'); 
             }
           });
           return;
@@ -49,7 +48,6 @@ module.exports = function() {
             const conf = JSON.parse(getConf); 
 
             app.createCount(curFile, conf); 
-            console.log('added countdown', f); 
           });
 
           return; 
