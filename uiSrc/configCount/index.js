@@ -1,6 +1,6 @@
 let remote = require('electron').remote; 
 let win = remote.getCurrentWindow(); 
-let configFile, countConf; 
+let configDir, configFile, countConf; 
 let newCount = true; 
 
 if(win.countConf) {
@@ -10,6 +10,8 @@ if(win.countConf) {
   countConf.destDate = new Date(countConf.destDate); 
 }
 else {
+  configDir = win.dataDir; 
+
   countConf = {
     title: 'Countdown to 5 days away',
     titleStyle: {
@@ -19,8 +21,8 @@ else {
     },
     windowStyle: {
       background: 'rgba(0, 0, 0, 0.5)',
-      border: "",
-      borderRadius: ""
+      border: '',
+      borderRadius: ''
     },
     width: 300,
     height: 75,
@@ -56,7 +58,7 @@ const rgbToHex = (r, g, b) => {
   const getPart = (p) => {
     let hex = p.toString(16);
     return hex.length === 1 ? '0' + hex : hex; 
-  }
+  };
 
   return '#' + getPart(r) + getPart(g) + getPart(b); 
 };
@@ -163,7 +165,7 @@ const updatePrev = () => {
 
     webview.executeJavaScript('window.loadConf(' + JSON.stringify(countConf) + ');'); 
   }, 100); 
-}
+};
 
 require('./handleChange'); 
 require('./handlePartsOrd');  
@@ -185,12 +187,12 @@ createBtn.addEventListener('click', () => {
     win.close();
   }
   else {
-    const dataDir = path.join(__dirname, '..', 'data/'); 
     const nextConfIdx = parseInt(
-      fs.readdirSync(dataDir)
-        .sort((a, b) => a < b)[0]
-    ) + 1; 
-    const newConfigFile = path.join(dataDir, nextConfIdx + '.json'); 
+      fs.readdirSync(configDir)
+        .sort((a, b) => a < b)[0]) + 1; 
+
+    const newConfigFile = path.join(configDir, nextConfIdx + '.json'); 
+    
     fs.writeFileSync(newConfigFile, configData);
     win.close(); 
   }

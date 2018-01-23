@@ -4,7 +4,7 @@
     return font.trim().length === 0 
       ? 'sans-serif' 
       : font.trim() + ', sans-serif'; 
-  }
+  };
 
   const updateDestTime = () => {
     const parseParts = destTime.value.split(':');
@@ -36,23 +36,23 @@
       obj
     );
     updatePrev();  
-  }
+  };
   
   onChange(titleFontFamily, () => {
     upTitleStyle({
-        fontFamily: getFont(titleFontFamily.value)
+      fontFamily: getFont(titleFontFamily.value)
     });
   }); 
   
   onChange(titleFontSize, () => {
     upTitleStyle({
-        fontSize: titleFontSize.value.trim() + 'px'
+      fontSize: titleFontSize.value.trim() + 'px'
     });
   }); 
   
   onChange(titleColor, () => {
     upTitleStyle({
-        color: titleColor.value.trim()
+      color: titleColor.value.trim()
     }); 
   }); 
   
@@ -97,7 +97,7 @@
     upCountStyle({
       textAlign: countdownPos.value
     }); 
-  })
+  });
   
   const upWinStyle = (obj) => {
     countConf.windowStyle = Object.assign(
@@ -120,7 +120,7 @@
     upWinStyle({
       background: getRgba(bgColor, bgOpacity)
     }); 
-  }
+  };
   
   onChange(bgColor, upWinBg);
   onChange(bgOpacity, upWinBg); 

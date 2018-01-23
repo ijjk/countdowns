@@ -10,11 +10,11 @@
     "border": "",
     "borderRadius": ""
   },
-  "width": 327,
-  "height": 104,
-  "posY": 140,
-  "posX": 1082,
-  "destDate": "2018-01-28T06:27:38.174Z",
+  "width": 300,
+  "height": 75,
+  "posY": 124,
+  "posX": 758,
+  "destDate": "2018-01-28T18:59:31.180Z",
   "labelPos": "bottom",
   "order": [
     "days",

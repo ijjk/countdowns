@@ -58,25 +58,25 @@ const loadConf = (conf) => {
       const label = p.substr(0, 1).toUpperCase() + p.substr(1, p.length); 
 
       switch(conf.labelPos) {
-        case 'top': {
-          countStr += '<p>' + label + '</p>';
-          countStr += '<p>' + ts[p] + '</p>'; 
-          break; 
-        }
-        case 'left': {
-          countStr += '<p class="left"> ' + label + ' ' + ts[p] + comma + '</p>'; 
-          break; 
-        }
-        case 'bottom': {
-          countStr += '<p>' + ts[p] + '</p>'; 
-          countStr += '<p>' + label + '</p>';
-          break; 
-        }
-        // default is right
-        default: {
-          countStr += '<p>' + ' ' + ts[p] + ' ' + label + comma + '</p>'; 
-          break;
-        }
+      case 'top': {
+        countStr += '<p>' + label + '</p>';
+        countStr += '<p>' + ts[p] + '</p>'; 
+        break; 
+      }
+      case 'left': {
+        countStr += '<p class="left"> ' + label + ' ' + ts[p] + comma + '</p>'; 
+        break; 
+      }
+      case 'bottom': {
+        countStr += '<p>' + ts[p] + '</p>'; 
+        countStr += '<p>' + label + '</p>';
+        break; 
+      }
+      // default is right
+      default: {
+        countStr += '<p>' + ' ' + ts[p] + ' ' + label + comma + '</p>'; 
+        break;
+      }
       }
 
       countStr += '</div>'; 
@@ -90,7 +90,7 @@ const loadConf = (conf) => {
   let units = 0; 
 
   parts.forEach((p) => {
-    units = units | countdown[p.toUpperCase()]
+    units = units | countdown[p.toUpperCase()];
   });
 
   timer = countdown(

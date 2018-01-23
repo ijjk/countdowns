@@ -100,7 +100,7 @@
     }
   
     updateOrderParts(); 
-  }
+  };
   
   orderPartsKeys.forEach((key) => {
     const el = orderParts[key]; 

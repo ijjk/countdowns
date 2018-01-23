@@ -11,9 +11,9 @@
     "borderRadius": ""
   },
   "width": 300,
-  "height": 75,
-  "posY": 19,
-  "posX": 782,
+  "height": 100,
+  "posY": 4,
+  "posX": 744,
   "destDate": "2018-01-28T06:50:44.441Z",
   "labelPos": "bottom",
   "order": [

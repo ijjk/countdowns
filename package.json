@@ -8,10 +8,14 @@
   "private": false,
   "scripts": {
     "start": "electron --enable-transparent-visuals --disable-gpu .",
-    "watch": "nodemon -w index.js --exec yarn start"
+    "watch": "nodemon -w index.js -w ./src --exec yarn start",
+    "lint": "eslint --config .eslintrc.json ./index.js ./src"
   },
   "dependencies": {
-    "electron": "^1.7.10",
+    "electron": "^1.7.10"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0",
     "nodemon": "^1.14.11"
   }
 }
