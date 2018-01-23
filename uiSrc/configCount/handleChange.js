@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 (() => {
 
   const getFont = (font) => {
@@ -146,12 +148,12 @@
   }); 
   
   onChange(countWidth, () => {
-    countConf.width = countWidth.value.trim(); 
+    countConf.width = parseInt(countWidth.value); 
     updatePrev(); 
   });
   
   onChange(countHeight, () => {
-    countConf.height = countHeight.value.trim(); 
+    countConf.height = parseInt(countHeight.value); 
     updatePrev(); 
   }); 
   

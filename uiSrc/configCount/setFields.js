@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 (() => {
   let tmpDateVal = countConf.destDate.getFullYear();
   let tmpDateM = checkAdd0(countConf.destDate.getMonth() + 1);

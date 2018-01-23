@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 (() => {
 
   orderPartsKeys = Object.keys(orderParts); 

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 let remote = require('electron').remote; 
 let win = remote.getCurrentWindow(); 
 let configDir, configFile, countConf; 
