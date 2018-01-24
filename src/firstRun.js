@@ -16,12 +16,25 @@ module.exports = function() {
     // its the first leave isFirst = true and create .hasRun
     fs.writeFileSync(hasRun, 'hello'); 
   }
-
+  
   if(isFirst) {
+
+    const AutoLaunch = require('auto-launch'); 
+    const autoLaunch = new AutoLaunch({
+      name: 'Countdowns'
+    }); 
+
+    autoLaunch.isEnabled()
+      .then((isEnabled) => {
+        if(isEnabled) return; 
+        autoLaunch.enable().catch();
+      })
+      .catch(); 
+
     let welcomeWin = new BrowserWindow({
       icon: app.paths.icon,
       title: 'Installation complete!',
-      height: 200,
+      height: 160,
       width: 400,
       autoHideMenuBar: true
     }); 

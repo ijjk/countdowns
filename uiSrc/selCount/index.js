@@ -29,7 +29,7 @@ const getBtn = (id, editDel) => {
     tmp.splice(tmp.indexOf(id), 1); 
     win.configs = [...tmp]; 
 
-    if(win.configs.length - 1 > 0) {
+    if(win.configs.length > 0) {
       win.reload(); 
       return; 
     }

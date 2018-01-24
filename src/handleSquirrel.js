@@ -1,7 +1,7 @@
 module.exports = function() {
   const app = this; 
-  const AutoLaunch = require('auto-launch'); 
 
+  const AutoLaunch = require('auto-launch'); 
   const autoLaunch = new AutoLaunch({
     name: 'Countdowns'
   }); 
@@ -41,16 +41,9 @@ module.exports = function() {
     // - Write to the registry for things like file associations and
     //   explorer context menus
 
-    autoLaunch.isEnabled()
-      .then((isEnabled) => {
-        if(isEnabled) return; 
-        autoLaunch.enable(); 
-      })
-      .catch(); 
-
     // Install desktop and start menu shortcuts
     spawnUpdate(['--createShortcut', exeName]);
-
+    
     setTimeout(app.quit, 1000);
     return true;
 
@@ -58,12 +51,8 @@ module.exports = function() {
     // Undo anything you did in the --squirrel-install and
     // --squirrel-updated handlers
 
-    autoLaunch.isEnabled()
-      .then((isEnabled) => {
-        if(isEnabled) autoLaunch.disable(); 
-      })
-      .catch(); 
-
+    autoLaunch.disable().catch(); 
+      
     // Remove desktop and start menu shortcuts
     spawnUpdate(['--removeShortcut', exeName]);
 
