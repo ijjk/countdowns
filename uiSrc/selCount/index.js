@@ -24,6 +24,10 @@ const getBtn = (id, editDel) => {
     
     const curFile = path.join(win.paths.dataDir, id); 
     fs.unlinkSync(curFile); 
+    
+    let tmp = [...win.configs]; 
+    tmp.splice(tmp.indexOf(id), 1); 
+    win.configs = [...tmp]; 
 
     if(win.configs.length - 1 > 0) {
       win.reload(); 

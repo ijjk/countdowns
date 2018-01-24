@@ -10,7 +10,7 @@
     "start": "electron .",
     "watch": "nodemon -w index.js -w ./src --exec yarn start",
     "lint": "eslint --config .eslintrc.json ./index.js ./src",
-    "build": "electron-packager . Countdowns --platform=win32 --arch=x64 --icon=icon.ico --ignore=data --package-manager=yarn"
+    "build": "electron-packager . Countdowns --platform=win32 --arch=x64 --icon=icon.ico --ignore=.eslintrc.json --ignore=.gitignore --ignore=.git --ignore=data --ignore=yarn.lock --package-manager=yarn"
   },
   "dependencies": {
     "deep-diff": "^0.3.8"
