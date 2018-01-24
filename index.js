@@ -57,11 +57,6 @@ app.on('ready', () => {
   app.tray.setContextMenu(contextMenu); 
 
   app.loadCounts(); 
-
-  // give time for countdowns to load
-  setTimeout(() => {
-    app.createSelectWin(); 
-  }, 1000); 
 });
 // end of app.on('ready')
 
