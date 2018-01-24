@@ -24,12 +24,16 @@ module.exports = function() {
       name: 'Countdowns'
     }); 
 
-    autoLaunch.isEnabled()
-      .then((isEnabled) => {
-        if(isEnabled) return; 
-        autoLaunch.enable().catch();
-      })
-      .catch(); 
+    const getExecName = path.basename(process.execPath).toLowerCase(); 
+    
+    if(getExecName.indexOf('countdown') > 0) {
+      autoLaunch.isEnabled()
+        .then((isEnabled) => {
+          if(isEnabled) return; 
+          autoLaunch.enable().catch();
+        })
+        .catch(); 
+    }
 
     let welcomeWin = new BrowserWindow({
       icon: app.paths.icon,
