@@ -7,7 +7,21 @@ const fs = require('fs');
 const path = require('path'); 
 
 // handle squirrel events
-if(require('./src/handleSquirrel').bind(app)()) app.quit(); 
+if(require('./src/handleSquirrel').bind(app)()) {
+  app.quit(); 
+  return; 
+}
+
+// only allow singleInstance of app
+
+const shouldQuit = app.makeSingleInstance((commandLine, workingDir) => {
+  return true; 
+});
+
+if(shouldQuit) {
+  app.quit(); 
+  return; 
+}
 
 app.tray = null; 
 app.wins = {}; 
