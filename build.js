@@ -9,6 +9,7 @@ console.log('creating windows installer');
 createWindowsInstaller({
   appDirectory: path.join(outPath, 'Countdowns-win32-x64'),
   authors: 'JJ',
+  name: 'Countdowns',
   noMsi: true,
   loadingGif: path.join(__dirname, 'loading.gif'),
   outputDirectory: path.join(outPath, 'windows-installer'),
