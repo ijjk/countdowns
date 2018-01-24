@@ -1,10 +1,9 @@
 const fs = require('fs'); 
 const path = require('path');
-const objDiff = require('deep-diff');  
 
 module.exports = function() {
   const app = this; 
-  app.changeBuffer = 750; // milliseconds before acting on change;
+  app.changeBuffer = 850; // milliseconds before acting on change;
   let watchTime = null; 
   
   fs.watch(app.paths.dataDir, () => {
@@ -61,28 +60,23 @@ module.exports = function() {
           const newConf = JSON.parse(getConf); 
           const curConf = app.wins[f].countConf; 
 
-          // check if config was changed
+          // check if config was actually changed
           if(JSON.stringify(newConf) === JSON.stringify(curConf)) {
             return; 
           }
 
-          // check what changed 
-          let changes = objDiff(curConf, newConf); 
-          
-          /* 
-            if position changed ignore it because
-            it has already updated
-          */
-          switch(changes[path]) {
-          case 'posX':
-          case 'posY':
-            return; 
-          default: 
-            break; 
-          }
-
-          app.wins[f].countConf = newConf; 
+          const curSize = app.wins[f].getSize(); 
+          app.wins[f].countConf = Object.assign({}, newConf); 
           app.wins[f].reload(); 
+          
+          if(curSize[0] != newConf.width ||
+            curSize[1] != newConf.height)
+          {
+            app.wins[f].ignoreResize = true; 
+            app.wins[f].setSize(newConf.width, newConf.height); 
+            app.wins[f].width = newConf.width; 
+            app.wins[f].height = newConf.height; 
+          }
 
         });
         

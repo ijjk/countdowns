@@ -67,7 +67,7 @@ app.on('ready', () => {
       type: 'normal',
       click: () => {
         if(app.selCountWin) {
-          console.log('edit countdowns window is already open'); 
+          app.selCountWin.focus(); 
           return; 
         }
         app.createSelectWin();

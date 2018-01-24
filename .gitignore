@@ -1,4 +1,5 @@
 /node_modules
 /data
 /build
+.hasRun
 .DS_Store

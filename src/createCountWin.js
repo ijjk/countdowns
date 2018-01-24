@@ -45,7 +45,7 @@ module.exports = function(configFile, conf) {
 
     wins[idx].updateConfTime = setTimeout(() => {
       try {
-        fs.writeFileSync(configFile, JSON.stringify(conf, null, 2));  
+        fs.writeFileSync(configFile, JSON.stringify(wins[idx].countConf, null, 2));  
       }
       catch(err) {
         console.error(err); 
@@ -64,12 +64,13 @@ module.exports = function(configFile, conf) {
   }); 
 
   wins[idx].resizeTime = null; 
-  wins[idx].resized = (width, height) => {
+
+  wins[idx].resized = (width, height) => {    
     clearTimeout(wins[idx].resizeTime); 
 
     wins[idx].resizeTime = setTimeout(() => {
-      conf.width = width; 
-      conf.height = height; 
+      wins[idx].countConf.width = width; 
+      wins[idx].countConf.height = height; 
       updateConf(); 
     }, 500);
   };
@@ -80,9 +81,8 @@ module.exports = function(configFile, conf) {
 
     wins[idx].moveTime = setTimeout(() => {
       const newPos = wins[idx].getPosition(); 
-      
-      conf.posX = newPos[0]; 
-      conf.posY = newPos[1]; 
+      wins[idx].countConf.posX = newPos[0]; 
+      wins[idx].countConf.posY = newPos[1]; 
       updateConf(); 
     }, 500); 
 

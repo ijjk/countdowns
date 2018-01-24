@@ -41,6 +41,7 @@ module.exports = function() {
       title: 'Installation complete!',
       height: 160,
       width: 400,
+      skipTaskbar: true,
       autoHideMenuBar: true
     }); 
 
