@@ -6,6 +6,9 @@ const {
 const fs = require('fs'); 
 const path = require('path'); 
 
+// handle squirrel events
+if(require('./src/handleSquirrel').bind(app)()) app.quit(); 
+
 app.tray = null; 
 app.wins = {}; 
 app.paths = {}; 
@@ -67,6 +70,9 @@ app.on('ready', () => {
 
   app.tray.setToolTip('Manage countdowns'); 
   app.tray.setContextMenu(contextMenu); 
+
+  // check if first run
+  require('./src/firstRun').bind(app)(); 
 
   app.loadCounts(); 
 });
