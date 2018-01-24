@@ -4,10 +4,10 @@ const objDiff = require('deep-diff');
 
 module.exports = function() {
   const app = this; 
-  const changeBuffer = 1250; // milliseconds before acting on change;
+  app.changeBuffer = 750; // milliseconds before acting on change;
   let watchTime = null; 
   
-  fs.watch(app.paths.dataDir, (e) => {
+  fs.watch(app.paths.dataDir, () => {
     clearTimeout(watchTime); 
 
     watchTime = setTimeout(() => {
@@ -88,7 +88,7 @@ module.exports = function() {
         
       }); // end of fs.readdir      
 
-    }, changeBuffer); 
+    }, app.changeBuffer); 
 
   });
 

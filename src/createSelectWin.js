@@ -1,6 +1,4 @@
 const { BrowserWindow } = require('electron'); 
-const path = require('path'); 
-const fs = require('fs'); 
 const url = require('url');
 
 module.exports = function() {

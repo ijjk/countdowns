@@ -3,6 +3,7 @@ const {
   Menu,
   Tray
 } = require('electron'); 
+const fs = require('fs'); 
 const path = require('path'); 
 
 app.tray = null; 
@@ -14,6 +15,17 @@ app.paths.uiSrc = path.join(__dirname, 'uiSrc');
 app.paths.countdown = path.join(app.paths.uiSrc, 'countdown', 'index.html'); 
 app.paths.configCount = path.join(app.paths.uiSrc, 'configCount', 'index.html'); 
 app.paths.selCount = path.join(app.paths.uiSrc, 'selCount', 'index.html'); 
+
+// make sure data dir exists
+try {
+  fs.readdirSync(app.paths.dataDir); 
+}
+catch(e) {
+  if(e.code === 'ENOENT') {
+    fs.mkdirSync(app.paths.dataDir); 
+  }
+}
+
 
 app.createCount = require('./src/createCountWin').bind(app); 
 app.loadCounts = require('./src/loadCounts').bind(app); 
@@ -62,7 +74,8 @@ app.on('ready', () => {
 
 app.on('window-all-closed', () => {
   if(process.platform !== 'darwin') {
-    app.quit(); 
+    // don't quit so icon stays in tray
+    // app.quit(); 
   }
 }); 
 

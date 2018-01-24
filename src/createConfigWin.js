@@ -21,6 +21,8 @@ module.exports = function(countId) {
     slashes: true
   })); 
 
+  configWin.changeBuffer = app.changeBuffer; 
+
   if(typeof countId === 'number' || 
     (typeof countId === 'string' && countId.trim().length > 0) )
   {

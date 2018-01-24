@@ -1,21 +1,24 @@
 {
-  "name": "countdown",
+  "name": "countdowns",
   "version": "0.1.0",
   "description": "a desktop countdown built with electron",
   "main": "index.js",
-  "author": "JJ Kasper",
+  "author": "JJ",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "electron --enable-transparent-visuals --disable-gpu .",
+    "start": "electron .",
     "watch": "nodemon -w index.js -w ./src --exec yarn start",
-    "lint": "eslint --config .eslintrc.json ./index.js ./src"
+    "lint": "eslint --config .eslintrc.json ./index.js ./src",
+    "build": "electron-packager . Countdowns --platform=win32 --arch=x64 --icon=icon.ico --ignore=data --package-manager=yarn"
   },
   "dependencies": {
-    "deep-diff": "^0.3.8",
-    "electron": "^1.7.10"
+    "deep-diff": "^0.3.8"
   },
   "devDependencies": {
+    "electron": "^1.7.10",
+    "electron-packager": "^10.1.1",
+    "electron-winstaller": "^2.6.4",
     "eslint": "^4.16.0",
     "nodemon": "^1.14.11"
   }

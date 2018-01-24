@@ -24,7 +24,12 @@ const getBtn = (id, editDel) => {
     
     const curFile = path.join(win.paths.dataDir, id); 
     fs.unlinkSync(curFile); 
-    win.reload(); 
+
+    if(win.configs.length - 1 > 0) {
+      win.reload(); 
+      return; 
+    }
+    win.close(); 
   };
 
   const editFunc = () => {
@@ -60,3 +65,24 @@ win.configs.forEach((f) => {
 
   counts.appendChild(wrapWv);
 }); 
+
+let secsLeft = 5; 
+const msgP1 = 'You do not have any countdowns yet. Closing in '; 
+const closeCountdown = () => {
+  if(secsLeft === 0) {
+    win.close(); 
+  }
+
+  let s = secsLeft === 1 ? '' : 's'; 
+  counts.innerText = msgP1 + secsLeft + ' second' + s + '.'; 
+
+  secsLeft -= 1; 
+  setTimeout(closeCountdown, 1000); 
+};
+
+if(win.configs.length === 0) {
+  counts.style.paddingTop = '35px'; 
+  counts.style.textAlign = 'center'; 
+  counts.innerText = msgP1 + secsLeft + ' seconds.'; 
+  closeCountdown(); 
+}

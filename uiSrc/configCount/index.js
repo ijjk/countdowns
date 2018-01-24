@@ -208,14 +208,22 @@ createBtn.addEventListener('click', () => {
     win.close();
   }
   else {
-    const nextConfIdx = parseInt(
-      fs.readdirSync(configDir)
-        .sort((a, b) => a < b)[0]) + 1; 
+    let nextConfIdx = fs.readdirSync(configDir); 
+
+    if(nextConfIdx.length === 0) {
+      nextConfIdx = 0; 
+    }
+    else {
+      nextConfIdx.sort((a, b) => a < b); 
+      nextConfIdx = parseInt(nextConfIdx[0]) + 1; 
+    }
 
     const newConfigFile = path.join(configDir, nextConfIdx + '.json'); 
     
     fs.writeFileSync(newConfigFile, configData);
-    win.close(); 
+    setTimeout(() => {
+      win.close(); 
+    }, (win.changeBuffer / 2)); 
   }
 }); 
 

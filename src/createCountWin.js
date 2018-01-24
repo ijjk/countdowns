@@ -1,4 +1,5 @@
-const { BrowserWindow } = require('electron'); 
+const electron = require('electron'); 
+const { BrowserWindow } = electron; 
 const fs = require('fs'); 
 const path = require('path'); 
 const url = require('url'); 
@@ -7,12 +8,24 @@ module.exports = function(configFile, conf) {
   const app = this; 
   const wins = app.wins;
   const idx = path.basename(configFile); 
+  
+  let curX = conf.posX; 
+  let curY = conf.posY; 
+
+  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
+  // make sure position isn't set to a greater than or equal value to current display's resolution
+  if(curX >= width) {
+    curX = (width - conf.width); 
+  }
+  if(curY >= height) {
+    curY = (height - conf.height); 
+  }
 
   wins[idx] = new BrowserWindow({
     width: conf.width,
     height: conf.height,
-    x: conf.posX,
-    y: conf.posY,
+    x: curX,
+    y: curY,
     frame: false,
     movable: true,
     transparent: true,
