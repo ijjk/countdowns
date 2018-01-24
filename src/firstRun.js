@@ -26,7 +26,8 @@ module.exports = function() {
 
     const getExecName = path.basename(process.execPath).toLowerCase(); 
     
-    if(getExecName.indexOf('countdown') > 0) {
+    if(getExecName.indexOf('countdown') >= 0) {
+      
       autoLaunch.isEnabled()
         .then((isEnabled) => {
           if(isEnabled) return; 
