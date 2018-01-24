@@ -26,7 +26,7 @@ if(shouldQuit) {
 app.tray = null; 
 app.wins = {}; 
 app.paths = {}; 
-app.paths.icon = path.join(__dirname, 'icon.png'); 
+app.paths.icon = path.join(__dirname, 'icon.ico'); 
 app.paths.dataDir = path.join(__dirname, 'data'); 
 app.paths.uiSrc = path.join(__dirname, 'uiSrc'); 
 app.paths.countdown = path.join(app.paths.uiSrc, 'countdown', 'index.html'); 
