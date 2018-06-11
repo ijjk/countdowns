@@ -5,6 +5,7 @@ const {
 } = require('electron'); 
 const fs = require('fs'); 
 const path = require('path'); 
+const os = require('os');
 
 // handle squirrel events
 if(require('./src/handleSquirrel').bind(app)()) {
@@ -13,7 +14,6 @@ if(require('./src/handleSquirrel').bind(app)()) {
 }
 
 // only allow singleInstance of app
-
 const shouldQuit = app.makeSingleInstance((commandLine, workingDir) => {
   return true; 
 });
@@ -22,11 +22,12 @@ if(shouldQuit) {
   app.quit(); 
   return; 
 }
+const icon = os.platform() === 'win32' ? 'icon.ico' : 'icon16x16.png'
 
 app.tray = null; 
 app.wins = {}; 
 app.paths = {}; 
-app.paths.icon = path.join(__dirname, 'icon.ico'); 
+app.paths.icon = path.join(__dirname, icon); 
 app.paths.dataDir = path.join(__dirname, 'data'); 
 app.paths.uiSrc = path.join(__dirname, 'uiSrc'); 
 app.paths.countdown = path.join(app.paths.uiSrc, 'countdown', 'index.html'); 
