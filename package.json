@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "a desktop countdown built with electron",
   "main": "index.js",
-  "author": "JJ",
+  "author": "JJ Kasper <jj@jjsweb.site>",
   "license": "MIT",
   "private": false,
   "scripts": {
