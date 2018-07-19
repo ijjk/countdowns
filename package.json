@@ -10,7 +10,8 @@
     "start": "electron .",
     "watch": "nodemon -w index.js -w ./src --exec yarn start",
     "lint": "eslint --config .eslintrc.json ./index.js ./src",
-    "build": "electron-packager . Countdowns --out=./build --platform=win32 --arch=x64 --icon=icon.ico --ignore=.eslintrc.json --ignore=.gitignore --ignore=.git --ignore=data --ignore=yarn.lock --ignore=.hasRun --ignore=build.js --ignore=loading.gif --package-manager=yarn && node ./build.js"
+    "build-win": "electron-packager . Countdowns --out=./build --platform=win32 --arch=x64 --icon=icon.ico --ignore=.eslintrc.json --ignore=.gitignore --ignore=.git --ignore=data --ignore=yarn.lock --ignore=.hasRun --ignore=build.js --ignore=loading.gif --package-manager=yarn && node ./build.js",
+    "build-mac": "electron-packager . Countdowns --out=./build --platform=darwin --arch=x64 --icon=icon.png --ignore=.eslintrc.json --ignore=.gitignore --ignore=.git --ignore=data --ignore=yarn.lock --ignore=.hasRun --ignore=build.js --ignore=loading.gif --package-manager=yarn"
   },
   "dependencies": {
     "auto-launch": "^5.0.5"

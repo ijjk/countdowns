@@ -3,3 +3,4 @@
 /build
 .hasRun
 .DS_Store
+.vscode
