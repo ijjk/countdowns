@@ -55,7 +55,7 @@ win.configs.forEach((f) => {
   wrapWv.style.borderBottom = '1px solid #C0C0C0'; 
 
   const wv = document.createElement('webview'); 
-  wv.src = win.paths.countdown; 
+  wv.src = 'file:///' + win.paths.countdown; 
   wv.style.height = conf.height + 'px'; 
   wv.style.width = conf.width + 'px'; 
   

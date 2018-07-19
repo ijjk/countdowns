@@ -10,19 +10,18 @@ const os = require('os');
 // handle squirrel events
 if(require('./src/handleSquirrel').bind(app)()) {
   app.quit(); 
-  return; 
 }
 
 // only allow singleInstance of app
+// eslint-disable-next-line no-unused-vars
 const shouldQuit = app.makeSingleInstance((commandLine, workingDir) => {
   return true; 
 });
 
 if(shouldQuit) {
   app.quit(); 
-  return; 
 }
-const icon = os.platform() === 'win32' ? 'icon.ico' : 'icon16x16.png'
+const icon = os.platform() === 'win32' ? 'icon.ico' : 'icon16x16.png';
 
 app.tray = null; 
 app.wins = {}; 
